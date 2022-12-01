@@ -6,6 +6,19 @@ All submissions from across the years.
 
 Stepping out of the JS world and into the better, safer, and 🔥 blazingly faster 🔥 language, Rust.
 
+### Getting started with Rust
+
+```bash
+# create a new cargo package for a new day.
+# cargo new 2022/day-01-2022
+cargo new <year>/<day-num>
+
+# run the package
+# cargo run day-01-2022
+cargo run <day-num>
+
+```
+
 ---
 
 ### 2021 Language: JS
