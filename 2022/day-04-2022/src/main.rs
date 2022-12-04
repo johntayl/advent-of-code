@@ -5,34 +5,31 @@ fn main() {
     let mut total_within = 0;
     let mut total_overlapped = 0;
 
-    let pairs = input
+    input
         .split("\n")
         .map(|line| {
-            return line
+            // split out to pairs.
+            let pairs = line
                 .split(",")
                 .map(|x| {
-                    return x
-                        .split("-")
-                        .map(|x| {
-                            return x.parse::<u32>().unwrap();
-                        })
-                        .collect::<Vec<u32>>();
+                    x.split("-")
+                        .map(|x| x.parse::<u32>().unwrap())
+                        .collect::<Vec<u32>>()
                 })
                 .collect::<Vec<Vec<u32>>>();
+
+            // part 1
+            if check_within(pairs[0][0], pairs[0][1], pairs[1][0], pairs[1][1]) {
+                total_within += 1;
+            }
+
+            // part 2
+            if check_overlap(pairs[0][0], pairs[0][1], pairs[1][0], pairs[1][1]) {
+                total_overlapped += 1;
+            }
+            return pairs;
         })
-        .collect::<Vec<Vec<Vec<u32>>>>();
-
-    for pair in pairs {
-        // part 1
-        if check_within(pair[0][0], pair[0][1], pair[1][0], pair[1][1]) {
-            total_within += 1;
-        }
-
-        // part 2
-        if check_overlap(pair[0][0], pair[0][1], pair[1][0], pair[1][1]) {
-            total_overlapped += 1;
-        }
-    }
+        .for_each(drop); // drop what is consumed from iterator.
 
     println!("total_within: {}", total_within);
     println!("total_overlapped: {}", total_overlapped);
