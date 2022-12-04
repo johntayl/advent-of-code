@@ -1,4 +1,4 @@
-use std::{collections::HashMap, ops::Index};
+use std::{collections::HashMap};
 
 fn split_string_half(string: &str) -> (String, String) {
     let half = string.len() / 2;
