@@ -6,7 +6,8 @@
 **/*.db
 
 **/*.log
-**/*/node_modules/
 **/*-lock.json
 
 /target
+
+node_modules/
