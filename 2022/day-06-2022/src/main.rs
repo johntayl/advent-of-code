@@ -37,5 +37,5 @@ fn main() {
     // print result
     println!("Result: {} at {}", letter_stack, marker_index);
 
-    println!("time: {}µs", now.elapsed().as_micros());
+    println!("time: {}ms", now.elapsed().as_millis());
 }

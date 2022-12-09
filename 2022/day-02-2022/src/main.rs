@@ -1,15 +1,15 @@
 use std::collections::HashMap;
 
 fn main() {
-
     // A, B, C = rock, paper, scissors
     // X, Y, Z = rock, paper, scissors
     let input = include_str!("input.txt");
-    let games = input.lines().map(|line| {
-        return line.split_whitespace().collect::<Vec<&str>>()
-    }).collect::<Vec<Vec<&str>>>();
-        
-    let mut total_score_1=  0;    
+    let games = input
+        .lines()
+        .map(|line| return line.split_whitespace().collect::<Vec<&str>>())
+        .collect::<Vec<Vec<&str>>>();
+
+    let mut total_score_1 = 0;
     let mut total_score_2 = 0;
 
     for game in games {
@@ -50,14 +50,14 @@ fn score(a: &str, b: &str) -> usize {
         Some(&v) => {
             a_shape = v;
         }
-        None =>{}
+        None => {}
     }
 
     match b_shape_match {
         Some(&v) => {
             b_shape = v;
         }
-        None =>{}
+        None => {}
     }
 
     if a_shape == b_shape {
@@ -66,13 +66,19 @@ fn score(a: &str, b: &str) -> usize {
     }
 
     // lose conditions
-    if (a_shape == rock && b_shape == scissors ) || (a_shape == paper && b_shape == rock ) || (a_shape == scissors && b_shape == paper) {
+    if (a_shape == rock && b_shape == scissors)
+        || (a_shape == paper && b_shape == rock)
+        || (a_shape == scissors && b_shape == paper)
+    {
         // lose
         return b_shape;
     }
 
     // win conditions
-    if (b_shape == rock && a_shape == scissors )|| (b_shape == paper && a_shape == rock ) || (b_shape == scissors && a_shape == paper) {
+    if (b_shape == rock && a_shape == scissors)
+        || (b_shape == paper && a_shape == rock)
+        || (b_shape == scissors && a_shape == paper)
+    {
         return b_shape + win;
     }
 
@@ -107,8 +113,10 @@ fn strategy(a: &str, b: &str) -> usize {
         Some(&v) => {
             a_shape = v;
         }
-        None =>{}
+        None => {}
     }
+
+    let v = shape_map.get(a);
 
     if b == "X" {
         // lose
@@ -141,7 +149,7 @@ fn strategy(a: &str, b: &str) -> usize {
         }
 
         if a_shape == scissors {
-            return rock +win;
+            return rock + win;
         }
     }
 

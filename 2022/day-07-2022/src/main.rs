@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::time::Instant;
 
 struct OS {
     directories: HashMap<String, u64>,
@@ -7,6 +8,8 @@ struct OS {
 fn main() {
     let mut input = include_str!("input.txt");
     input = input.trim_end();
+
+    let now = Instant::now();
 
     let mut os = OS {
         directories: HashMap::new(),
@@ -89,6 +92,8 @@ fn main() {
 
     println!("Total size: {}", total_size);
     println!("smallest size: {}", smallest_size);
+
+    println!("time: {}ms", now.elapsed().as_millis());
 }
 
 fn build_path_key(path: Vec<&str>) -> String {
