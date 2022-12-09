@@ -63,19 +63,11 @@ fn main() {
                         let mut move_x = 0;
                         let mut move_y = 0;
                         if knot_1.x != knot_2.x {
-                            if knot_1.x - knot_2.x > 0 {
-                                move_x = 1
-                            } else {
-                                move_x = -1
-                            }
+                            move_x = if knot_1.x - knot_2.x > 0 { 1 } else { 1 };
                         }
 
                         if knot_1.y != knot_2.y {
-                            if knot_1.y - knot_2.y > 0 {
-                                move_y = 1
-                            } else {
-                                move_y = -1
-                            }
+                            move_y = if knot_1.y - knot_2.y > 0 { 1 } else { -1 };
                         }
 
                         knot_2.add_mutable(&Vec3::new(move_x, move_y, 0));
