@@ -28,61 +28,28 @@ fn score(a: &str, b: &str) -> usize {
     let paper = 2;
     let scissors = 3;
 
+    let lose = 0;
     let win = 6;
     let draw = 3;
 
-    let mut shape_map = HashMap::new();
-    shape_map.insert("A", rock);
-    shape_map.insert("B", paper);
-    shape_map.insert("C", scissors);
+    let mut outcome_map = HashMap::new();
+    outcome_map.insert("A X", rock + draw);
+    outcome_map.insert("A Y", paper + win);
+    outcome_map.insert("A Z", scissors + lose);
 
-    shape_map.insert("X", rock);
-    shape_map.insert("Y", paper);
-    shape_map.insert("Z", scissors);
+    outcome_map.insert("B X", rock + lose);
+    outcome_map.insert("B Y", paper + draw);
+    outcome_map.insert("B Z", scissors + win);
 
-    let a_shape_match = shape_map.get(a);
-    let b_shape_match = shape_map.get(b);
+    outcome_map.insert("C X", rock + win);
+    outcome_map.insert("C Y", paper + lose);
+    outcome_map.insert("C Z", scissors + draw);
 
-    let mut a_shape = 0;
-    let mut b_shape = 0;
+    let key = format!("{} {}", a, b);
 
-    match a_shape_match {
-        Some(&v) => {
-            a_shape = v;
-        }
-        None => {}
-    }
+    let score = outcome_map.get(key.as_str()).unwrap();
 
-    match b_shape_match {
-        Some(&v) => {
-            b_shape = v;
-        }
-        None => {}
-    }
-
-    if a_shape == b_shape {
-        // draw
-        return b_shape + draw;
-    }
-
-    // lose conditions
-    if (a_shape == rock && b_shape == scissors)
-        || (a_shape == paper && b_shape == rock)
-        || (a_shape == scissors && b_shape == paper)
-    {
-        // lose
-        return b_shape;
-    }
-
-    // win conditions
-    if (b_shape == rock && a_shape == scissors)
-        || (b_shape == paper && a_shape == rock)
-        || (b_shape == scissors && a_shape == paper)
-    {
-        return b_shape + win;
-    }
-
-    return 0;
+    return *score;
 }
 
 fn strategy(a: &str, b: &str) -> usize {
@@ -93,65 +60,26 @@ fn strategy(a: &str, b: &str) -> usize {
     let paper = 2;
     let scissors = 3;
 
+    let lose = 0;
     let win = 6;
     let draw = 3;
 
-    let mut shape_map = HashMap::new();
-    shape_map.insert("A", rock);
-    shape_map.insert("B", paper);
-    shape_map.insert("C", scissors);
+    let mut outcome_map = HashMap::new();
+    outcome_map.insert("A X", scissors + lose);
+    outcome_map.insert("A Y", rock + draw);
+    outcome_map.insert("A Z", paper + win);
 
-    shape_map.insert("X", rock);
-    shape_map.insert("Y", paper);
-    shape_map.insert("Z", scissors);
+    outcome_map.insert("B X", rock + lose);
+    outcome_map.insert("B Y", paper + draw);
+    outcome_map.insert("B Z", scissors + win);
 
-    let a_shape_match = shape_map.get(a);
+    outcome_map.insert("C X", paper + lose);
+    outcome_map.insert("C Y", scissors + draw);
+    outcome_map.insert("C Z", rock + win);
 
-    let mut a_shape = 0;
+    let key = format!("{} {}", a, b);
 
-    match a_shape_match {
-        Some(&v) => {
-            a_shape = v;
-        }
-        None => {}
-    }
+    let score = outcome_map.get(key.as_str()).unwrap();
 
-    let v = shape_map.get(a);
-
-    if b == "X" {
-        // lose
-        if a_shape == rock {
-            return scissors;
-        }
-
-        if a_shape == paper {
-            return rock;
-        }
-
-        if a_shape == scissors {
-            return paper;
-        }
-    }
-
-    if b == "Y" {
-        // draw
-        return a_shape + draw;
-    }
-
-    if b == "Z" {
-        // win
-        if a_shape == rock {
-            return paper + win;
-        }
-
-        if a_shape == paper {
-            return scissors + win;
-        }
-
-        if a_shape == scissors {
-            return rock + win;
-        }
-    }
-
-    return 0;
+    return *score;
 }
